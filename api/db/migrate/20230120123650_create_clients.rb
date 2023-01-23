@@ -6,7 +6,7 @@ class CreateClients < ActiveRecord::Migration[7.0]
       t.string :phone
       t.string :address
       t.string :client_number
-
+      t.string :password_digest
       t.timestamps
     end
   end
