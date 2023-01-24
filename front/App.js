@@ -1,25 +1,34 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import LoginScreen from './components/LoginScreen';
-import SplashScreen from './components/SplashScreen';
-import MainScreen from './components/MainScreen';
+import { StyleSheet, Text, View } from 'react-native';
+import Splash from './components/SplashScreen';
+import Loginscreen from './components/Loginscreen';
+import MyTabs from './components/bottom_nav';
+import { Provider,Context } from './components/auth';
+
 
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator  screenOptions={{
-    headerShown: false
-  }}>
-        <Stack.Screen name="splash" component={SplashScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Main" component={MainScreen} />
-
+    <Provider>
+      <NavigationContainer>
+      <Stack.Navigator
+         screenOptions={{headerShown: false}}
+         >
+        <Stack.Screen
+          name="Splash"
+          component={Splash}
+          options={{title: 'Welcome'}}
+      
+        />
+        <Stack.Screen name="login" component={Loginscreen} />
+        <Stack.Screen name="Tabs" component={MyTabs} />
+      
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 

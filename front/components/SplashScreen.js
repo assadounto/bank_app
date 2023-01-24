@@ -1,17 +1,23 @@
-import React from "react";
+import React,{useContext} from "react";
 import { ImageBackground, StyleSheet, Pressable, Text,View } from "react-native";
+import { Context } from "./auth";
+
 
 const image = { uri: "./assets/icon.png" };
 
-const Splash = ({navigation}) => (
+const Splash = ({navigation}) => {
+    const {state} = useContext(Context);
+ 
+    return(
     <View style={styles.container}>
-        <ImageBackground source={require("../assets/splash.png")} resizeMode="cover" style={styles.image}>
-          <Pressable style={styles.login} onPress={() => navigation.navigate("Main")} >
+        <ImageBackground source={require("../assets/login2.png")} resizeMode="cover" style={styles.image}>
+          <Pressable style={styles.login} onPress={() => state.token ? navigation.navigate("Tabs"):navigation.navigate("login") } >
             <Text style={styles.text}>Login</Text>
          </Pressable>
         </ImageBackground>
     </View>
-);
+    )
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -22,9 +28,10 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     },
     text: {
-        fontSize: 17,
+        fontSize: 25,
         lineHeight: 84,
         fontWeight: "bold",
+        borderRadius: 10,
     },
     login: {
         borderRadius: 10,
@@ -33,6 +40,7 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
         justifyContent: "flex-end",
         margin: 25,
+        
     },
 });
 

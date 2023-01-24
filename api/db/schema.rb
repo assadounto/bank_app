@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_123806) do
 
   create_table "accounts", force: :cascade do |t|
     t.string "account_number"
-    t.decimal "balance"
+    t.decimal "balance", precision: 8, scale: 2, default: "0.0"
     t.bigint "client_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_123806) do
     t.string "phone"
     t.string "address"
     t.string "client_number"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,13 +37,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_20_123806) do
   create_table "transactions", force: :cascade do |t|
     t.string "transaction_number"
     t.string "transaction_type"
-    t.decimal "amount"
+    t.string "bank"
+    t.string "name"
+    t.decimal "amount", precision: 8, scale: 2, default: "0.0"
     t.bigint "account_id", null: false
+    t.bigint "client_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index ["client_id"], name: "index_transactions_on_client_id"
   end
 
   add_foreign_key "accounts", "clients"
   add_foreign_key "transactions", "accounts"
+  add_foreign_key "transactions", "clients"
 end

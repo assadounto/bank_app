@@ -1,17 +1,17 @@
 import React from "react";
 import { Feather } from '@expo/vector-icons'; 
-import { ImageBackground, StyleSheet, Pressable, Text,View } from "react-native";
+import {StyleSheet, Text,View,ScrollView } from "react-native";
 
-const BalanceScreen = () => {
+const BalanceScreen = ({balance}) => {
     return (
-        <View>
+        <ScrollView>
             <Text style={styles.title}>Your balance</Text>
-            <Text style={styles.amount}>{'\u20B5'}0.00</Text>
+            <Text style={styles.amount}>{'\u20B5'}{balance}</Text>
             <View style={styles.trend}>
               <Feather style={{margin:4}} name="trending-up" size={18} color="green" />
               <Text style={{fontWeight:"700",fontSize:17}}>3.6%</Text>
             </View>
-        </View>
+        </ScrollView>
     )
 }
  
@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
 
     },
     trend: {
-        position: "absolute",
-        top: 240,
+        marginBottom: 30,
         alignSelf: "center",
         display: "flex",
         flexDirection: "row",
